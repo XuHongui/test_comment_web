@@ -9,7 +9,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^6.6.0",
     "express": "^4.17.3",
+    "html-webpack-plugin": "^5.5.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "style-loader": "^3.3.1",
     "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2"
   }
