@@ -1,2 +1,1 @@
-import css from '../css/index.css';
-console.log("1");
+import less from '../less/index.less';

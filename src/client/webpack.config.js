@@ -1,4 +1,4 @@
-const {resolve} = require('path');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -6,7 +6,7 @@ module.exports = {
     entry: './src/js/index.js',
     output: {
         filename: './js/index.js',
-        path: resolve(__dirname, 'bulid')
+        path: path.resolve(__dirname, 'bulid')
     },
     module: {
         rules: [
@@ -29,5 +29,17 @@ module.exports = {
             filename: './css/index.css'
         })
     ],
-    mode: 'production'
+    mode: 'development',
+    externals: {
+        jquery: 'jquery1.12.4.min.js'
+    },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'public'),
+        },
+        compress: true,
+        port: 9000,
+        open: true
+        
+    }
 }

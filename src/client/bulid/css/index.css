@@ -1,3 +1,26 @@
-body{
-    background-color: black;
+/*!************************************************************************************************************************************************************!*\
+  !*** css ../../node_modules/_css-loader@6.6.0@css-loader/dist/cjs.js!../../node_modules/_less-loader@10.2.0@less-loader/dist/cjs.js!./src/less/index.less ***!
+  \************************************************************************************************************************************************************/
+* {
+  margin: 0px;
+  padding: 0px;
 }
+.wrap {
+  width: 668px;
+  border: #f3f3f3 1px solid;
+  height: 100px;
+  margin: 0 auto;
+}
+.wrap ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+.wrap ul li {
+  line-height: 30px;
+}
+.wrap ul #comment {
+  margin-right: 30px;
+  font-size: 20px;
+}
+

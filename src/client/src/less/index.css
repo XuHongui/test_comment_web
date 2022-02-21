@@ -1,0 +1,39 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.wrap {
+  width: 668px;
+  border: #f3f3f3 3px solid;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.wrap ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+}
+.wrap ul li {
+  line-height: 30px;
+}
+.wrap ul #comment {
+  margin-right: 30px;
+  font-size: 20px;
+}
+.wrap #myForm {
+  display: flex;
+}
+.wrap #myForm #inputText {
+  width: 80%;
+  height: 100px;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+.wrap #myForm #commitComment {
+  display: block;
+  margin-left: 30px;
+  padding: 0 20px;
+  margin-top: 30px;
+  height: 40px;
+}
