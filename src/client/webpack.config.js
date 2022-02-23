@@ -31,15 +31,18 @@ module.exports = {
     ],
     mode: 'development',
     externals: {
-        jquery: 'jquery1.12.4.min.js'
+        './jquery1.12.4.min.js': 'jQuery'
     },
     devServer: {
         static: {
-            directory: path.join(__dirname, 'public'),
+            directory: path.join(__dirname, 'bulid'),
         },
         compress: true,
         port: 9000,
-        open: true
-        
-    }
+        open: true,
+        //inline: true,
+        //hot: true
+        liveReload: true,     
+    },
+    target: 'web'
 }
