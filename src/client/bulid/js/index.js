@@ -26,17 +26,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _less_index_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../less/index.less */ \"./src/less/index.less\");\n/* harmony import */ var _jquery1_12_4_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./jquery1.12.4.min.js */ \"./jquery1.12.4.min.js\");\n/* harmony import */ var _jquery1_12_4_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jquery1_12_4_min_js__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\n\n\n//# sourceURL=webpack:///./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _less_index_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../less/index.less */ \"./src/less/index.less\");\n/* harmony import */ var _jquery1_12_4_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./jquery1.12.4.min.js */ \"./jquery1.12.4.min.js\");\n/* harmony import */ var _jquery1_12_4_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jquery1_12_4_min_js__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\n\r\n//提交按钮\r\n_jquery1_12_4_min_js__WEBPACK_IMPORTED_MODULE_1___default()(\"#commitComment\").click(function(){\r\n    // 获得输入框里的值\r\n    var comment = _jquery1_12_4_min_js__WEBPACK_IMPORTED_MODULE_1___default()('#inputText').val();\r\n    // 获取提交时间\r\n    var date = new Date();\r\n    //将字符串抓换变成字符串传入数据库中\r\n    var dateStr = date.getFullYear() + \"-\" + date.getMonth() + '-' + date.getDate() + \"T\" + date.getHours() + \":\" + date.getMinutes() + \":\" + date.getSeconds();\r\n    //插入到评论框当中\r\n    _jquery1_12_4_min_js__WEBPACK_IMPORTED_MODULE_1___default()('#commentList').prepend(`<li><div>${dateStr}   ${comment}</div></li>`);\r\n    \r\n    \r\n    /*\r\n    //向服务器发送请求\r\n    const xhr = new XMLHttpRequest();\r\n    //设置发送的地址\r\n    xhr.open('GET', 'http://127.0.0.1:8089/test');\r\n    //发送请求\r\n    xhr.send();\r\n    //观察请求的变化\r\n    xhr.onreadystatechange = ()=>{\r\n        //请求成功\r\n        if(xhr.readyState == 4){\r\n            if(xhr.status >= 200 && xhr.status < 300){\r\n                var data = JSON.parse(xhr.response);\r\n                //插入到评论框当中\r\n                $('#commentList').prepend(`<li><div>${data.date}   ${data.comment}</div></li>`);\r\n            }\r\n        }\r\n    }\r\n    */\r\n\r\n    const xhr = new XMLHttpRequest();\r\n    xhr.open('POST','http://127.0.0.1:8089/commit');\r\n    xhr.setRequestHeader('contentType', 'application/json');\r\n    xhr.send(JSON.stringify({asdfasd: \"fdsafasd\"}));\r\n    console.log(JSON.stringify({dateStr: dateStr, comment: comment}));\r\n    xhr.onreadystatechange = function(){\r\n        if(xhr.readyState == 4){\r\n            if(xhr.status == 200){\r\n                console.log(\"评论成功\");\r\n            }else{\r\n                console.log(\"评论失败\");\r\n            }\r\n        }\r\n    }\r\n});\n\n//# sourceURL=webpack:///./src/js/index.js?");
 
 /***/ }),
 
 /***/ "./jquery1.12.4.min.js":
 /*!*************************!*\
-  !*** external "jquery" ***!
+  !*** external "jQuery" ***!
   \*************************/
 /***/ ((module) => {
 
-module.exports = jquery;
+module.exports = jQuery;
 
 /***/ })
 
