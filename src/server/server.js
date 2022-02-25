@@ -29,12 +29,15 @@ app.get('/test',(req,res)=>{
     }
     res.send(JSON.stringify(data));
 });
+
 //提交评论的请求服务
 app.all('/commit', (req,res) => {
     res.header("Access-Control-Allow-Origin","*");
     res.header("Access-Control-Allow-Methods","*");
     res.header("Access-Control-Allow-Headers","*");
-    mongodbTool.addElement(req.body.dateStr, req.body.comment);
+    //date 是时间戳 comment是评论
+    mongodbTool.addElement(req.body.date, req.body.comment);
+    mongodbTool.findDateCount();
     res.send("ok");   
 });
 

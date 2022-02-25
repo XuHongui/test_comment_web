@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // 模板
 const commentSchema = new Schema({
-    comment: String,
-    date: String
+    date: String,
+    comment: String
 });
 // 实例化模板
 const Comment = mongoose.model("Comment",commentSchema);
@@ -24,6 +24,22 @@ function addElement(date, comment){
         }
     }) 
 }
+
+// 查看数据库中有多少条数据
+function findDateCount(){
+    Comment.count(function(err, count){
+        if(err){
+            console.log("查询有多少数据失败");
+        }else{
+            console.log("数据库中有" + count + "条数据");
+        }
+    });
+}
+
+// 链接
 exports.connectMongoose = connectMongoose;
+// 添加元素
 exports.addElement = addElement;
+// 查看数据库中有多少条数据
+exports.findDateCount = findDateCount;
 

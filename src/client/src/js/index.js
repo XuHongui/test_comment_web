@@ -6,11 +6,12 @@ $("#commitComment").click(function(){
     // 获得输入框里的值
     var comment = $('#inputText').val();
     // 获取提交时间
-    var date = new Date();
+    var date = Date.now();
     //将字符串抓换变成字符串传入数据库中
-    var dateStr = date.getFullYear() + "-" + date.getMonth() + '-' + date.getDate() + "T" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    //var dateStr = date.getFullYear() + "-" + date.getMonth() + '-' + date.getDate() + "T" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     //插入到评论框当中
-    $('#commentList').prepend(`<li><div>${dateStr}   ${comment}</div></li>`);
+    var strTodate = new Date(date);
+    $('#commentList').prepend(`<li><div>${strTodate}   ${comment}</div></li>`);
     
     
     /*
@@ -33,12 +34,12 @@ $("#commitComment").click(function(){
     }
     */
     
-
+    //点击评论后将代码提交到后台数据库中
     const xhr = new XMLHttpRequest();
     xhr.open('POST','http://127.0.0.1:8089/commit');
     xhr.setRequestHeader('content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('dateStr=' + dateStr + '&comment=' + comment);
-    console.log(JSON.stringify({dateStr: dateStr, comment: comment}));
+    xhr.send('date=' + date + '&comment=' + comment);
+    console.log(JSON.stringify({date: date, comment: comment}));
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4){
             if(xhr.status == 200){
