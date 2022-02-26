@@ -60,11 +60,13 @@ function backComment(page , count, callback){
                 if(err){
         
                 }else{
-                    //console.log(docs);
+                    //console.log(success, success - page*(count - 1), page*(count - 1), count, page);
+                    docs[docs.length] = true;
+                    //console.log(docs)
                     callback(docs);
                 }
-            }).limit(success - page*(count - 1));
-        }
+            }).limit(success - (page - 1)*count);
+        }       
     });
 }
 

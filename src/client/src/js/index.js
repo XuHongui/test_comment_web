@@ -1,6 +1,12 @@
 import less from '../less/index.less';
 import $ from './jquery1.12.4.min.js';
 var page = 1;
+var pageFull = false;
+
+//将Date转化成字符串
+function dateChangeString(date){
+    return date.toLocaleDateString() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+}
 //提交按钮
 $("#commitComment").click(function(){
     // 获得输入框里的值
@@ -10,8 +16,7 @@ $("#commitComment").click(function(){
     //将字符串抓换变成字符串传入数据库中
     //var dateStr = date.getFullYear() + "-" + date.getMonth() + '-' + date.getDate() + "T" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     //插入到评论框当中
-    var strTodate = new Date(date);
-    $('#commentList').prepend(`<li><div>${strTodate}   ${comment}</div></li>`);
+    $('#commentList').prepend(`<li><div>${dateChangeString(new Date(date))}   ${comment}</div></li>`);
     
     
     /*
@@ -51,20 +56,44 @@ $("#commitComment").click(function(){
     }
 });
 
-$("#test_back").click(function(){
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET','http://127.0.0.1:8089/backComment?page=' + page);
-    xhr.setRequestHeader('content-Type', 'application/x-www-form-urlencoded');
-    xhr.send();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4){
-            if(xhr.status == 200){
-                console.log("查询成功");
-                console.log(JSON.parse(xhr.response));
-                page++;
-            }else{
-                console.log("查询失败");
+//在末尾追加评论
+function addComment(data){
+    for(var i = data.length - 1; i >= 0; i--){
+        console.log(data[i],data[i].date);
+        var dateString = dateChangeString(new Date(parseInt(data[i].date)));
+        var comment = data[i].comment;
+        if(data[i] !== true){
+            $('#commentList').append(`<li><div>${dateString}   ${comment}</div></li>`);
+        }
+    }
+}
+
+function backCommentPlease(){
+    if(!pageFull){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET','http://127.0.0.1:8089/backComment?page=' + page);
+        xhr.setRequestHeader('content-Type', 'application/x-www-form-urlencoded');
+        xhr.send();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if(xhr.status == 200){
+                    console.log("查询成功");
+                    var backDate = JSON.parse(xhr.response);
+                    console.log(backDate);
+                    addComment(backDate);
+                    page++;
+                    if(backDate[backDate.length - 1] === true){
+                        pageFull = true;
+                    }
+                }else{
+                    console.log("查询失败");
+                }
             }
         }
-    }    
+    }
+}
+
+$("#test_back").click(function(){
+    backCommentPlease();    
 });
+backCommentPlease();
