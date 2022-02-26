@@ -1,6 +1,6 @@
 import less from '../less/index.less';
 import $ from './jquery1.12.4.min.js';
-
+var page = 1;
 //提交按钮
 $("#commitComment").click(function(){
     // 获得输入框里的值
@@ -35,7 +35,7 @@ $("#commitComment").click(function(){
     */
     
     //点击评论后将代码提交到后台数据库中
-    const xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open('POST','http://127.0.0.1:8089/commit');
     xhr.setRequestHeader('content-Type', 'application/x-www-form-urlencoded');
     xhr.send('date=' + date + '&comment=' + comment);
@@ -49,4 +49,22 @@ $("#commitComment").click(function(){
             }
         }
     }
+});
+
+$("#test_back").click(function(){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','http://127.0.0.1:8089/backComment?page=' + page);
+    xhr.setRequestHeader('content-Type', 'application/x-www-form-urlencoded');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            if(xhr.status == 200){
+                console.log("查询成功");
+                console.log(JSON.parse(xhr.response));
+                page++;
+            }else{
+                console.log("查询失败");
+            }
+        }
+    }    
 });

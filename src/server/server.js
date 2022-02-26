@@ -6,6 +6,7 @@ const app = express();
 const port = 8089;
 const upload = multer();
 
+
 //链接数据库
 mongodbTool.connectMongoose();
 
@@ -37,8 +38,17 @@ app.all('/commit', (req,res) => {
     res.header("Access-Control-Allow-Headers","*");
     //date 是时间戳 comment是评论
     mongodbTool.addElement(req.body.date, req.body.comment);
-    mongodbTool.findDateCount();
     res.send("ok");   
+});
+
+//返回5条评论
+app.all('/backComment', (req,res) => {
+    res.header("Access-Control-Allow-Origin","*");
+    res.header("Access-Control-Allow-Methods","*");
+    res.header("Access-Control-Allow-Headers","*");
+    mongodbTool.backComment(req.query.page, 5, (docs) => {
+        res.send(JSON.stringify(docs));   
+    });  
 });
 
 app.listen(port, () => {
